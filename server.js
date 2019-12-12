@@ -51,5 +51,25 @@ io.on('connection', (socket) => {
       },
     });
   });
+
+  socket.on('connect_failed', function(error) {
+    socket.json.send({
+      'event': 'error',
+      'data': {
+        message: 'connect failed',
+        error
+      },
+    });
+  });
+
+  socket.on('error', function(error) {
+    socket.json.send({
+      'event': 'error',
+      'data': {
+        message: 'error',
+        error
+      },
+    });
+  });
 });
 
